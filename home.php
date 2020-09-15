@@ -38,11 +38,11 @@
 	}
 	
 ##if ($semestercurrent > $semesterduration);{
-##	  $semesterreminder = "Antud semester on juba lõppenud!";
+##	  $semesterremaining = "Antud semester on juba lõppenud!";
 ##	}
-## teine lahendus KUI esimene ei tööta
-  //if($fromsemesterstartdays < 0) (semester pole peale hakanud) 
-  //leiame erinevuse tänasega (semesterduration jne)
+## teine lahendus KUI esimene ei tööta (pole kindel) 
+## if($fromsemesterstartdays < 0) (semester pole peale hakanud) 
+## leiame erinevuse tänasega (semesterduration jne)
   
   
 
