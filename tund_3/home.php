@@ -110,13 +110,9 @@
   <p><?php echo "Praeguse semestri kestvus algusest: " .$semestercurrentdays ." päeva"; ?></p>
   <hr>
   <?php echo $imghtml; ?>
+  
 </body>
 </html>
-
-
-
-
-
 
 
 

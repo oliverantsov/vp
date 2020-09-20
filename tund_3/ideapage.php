@@ -5,3 +5,4 @@
 	<input type="text" name="ideainput" placeholder="mõttekoht">
 	<input type="submit" name="ideasubmit" value="Saada mõte teele!">
   </form>
+  

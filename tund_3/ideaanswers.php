@@ -31,3 +31,4 @@
 <a href="home.php"> Tagasi kodulehele </a>
 <hr>
   <?php echo $ideahtml; ?>
+  
