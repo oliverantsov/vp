@@ -11,6 +11,7 @@
   $birthyear = null;
   $birthdate = null;
   $email = "";
+  $notice = "";
   
   $firstnameerror = "";
   $lastnameerror = "";
@@ -24,9 +25,15 @@
   $passwordsecondaryerror = "";
 
     if(isset($_POST["accountsubmit"])){
-	  if(strlen($_POST["passwordinput"]) < 8){
-		  $passworderror .= " Salasõna ei tohi olla väiksem kui 8 tähte! ";
-	  }  
+		
+		
+	  if (empty($_POST["passwordinput"])){
+		$passworderror = "Palun sisesta salasõna!";
+	  } else {
+		  if(strlen($_POST["passwordinput"]) < 8){
+			  $passworderror = "Liiga lühike salasõna (sisestasite ainult " .strlen($_POST["passwordinput"]) ." märki).";
+		  }
+	  }
 	  if(empty($_POST["firstnameinput"])){
 		  $firstnameerror .= " Eesnimi on sisestamata! ";
 	  } else {
@@ -88,30 +95,26 @@
 			  $firstname = "";
 			  $lastname = "";
 			  $gender = "";
-			  $birthday = null;
-			  $birthmonth = null;
-			  $birthyear = null;
-			  $birthdate = null;
 			  $email = "";
-		  } else {
-			  $notice = "Kahjuks tekkis tehniline viga: " .$result;
-		  }
+		  } 
 	  }
+	  
   $username = "Oliver Antsov";
   require ("header.php");
-
 ?>
 <img src="../vp_pics/vp_banner.png" alt="Veebiprogrammeerimise kursuse logo">
   <ul>
-	<li><a href="home.php"> Tagasi kodulehele </a></li>  
+	<li><a href="page.php"> Tagasi kodulehele </a></li>  
   </ul>
   <hr>
   <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="firstnameinput">Eesnimi:</label>
 	<input type="text" name="firstnameinput" id="firstnameinput" placeholder="Eesnimi" value="<?php echo $firstname; ?>"> <?php echo "<span style='color:red;'> $firstnameerror </span>"; ?>
 	<br>
+	<br>
 	<label for="lastnameinput">Perekonnanimi:</label>
 	<input type="text" name="lastnameinput" id="lastnameinput" placeholder="Perekonnanimi" value="<?php echo $lastname; ?>"> <?php echo "<span style='color:red;'> $lastnameerror </span>"; ?>
+	<br>
 	<br>
 	<label for="genderinput">Sugu:</label>
 	<input type="radio" name="genderinput" id="gendermale" value="1"<label for="gendermale">Mees</label> <?php if($gender == "1"){echo " checked";}?> <?php echo "<span style='color:red;'> $gendererror </span>"; ?>
@@ -166,11 +169,14 @@
 	<label for="emailinput">E-posti aadress (kasutajatunnuseks):</label>
 	<input type="email" name="emailinput" id="emailinput" placeholder="E-posti aadress" value="<?php echo $email; ?>"> <?php echo "<span style='color:red;'> $emailerror </span>"; ?>
 	<br>
+	<br>
 	<label for="passwordinput">Salasõna:</label>
 	<input type="password" name="passwordinput" id="passwordinput" placeholder="Salasõna"> <span><?php echo "<span style='color:red;'> $passworderror </span>"; ?>
 	<br>
+	<br>
 	<label for="passwordsecondaryinput">Salasõna teist korda:</label>
 	<input type="password" name="passwordsecondaryinput" id="passwordsecondaryinput" placeholder="Salasõna teist korda"> <?php echo "<span style='color:red;'> $passwordsecondaryerror </span>"; ?>
+	<br>
 	<br>
 	<input type="submit" name="accountsubmit" value="Salvesta kasutaja info"><span><?php echo "&nbsp; &nbsp; &nbsp;" .$notice; ?></span>
   </form>
