@@ -1,6 +1,8 @@
 <?php
+  require("usesession.php");
+  require("header.php");
   //var_dump($_POST);
-  $username = "Oliver Antsov";
+  //$username = "Oliver Antsov";
   $datenow = date("d.");
   $yearnow = date("Y");
   $clocknow = date("H:i:s");
@@ -69,16 +71,19 @@
 	  ##$imghtml .= '<img src="../img/' .$picfiles[$i] .'" alt="Tallinna Ülikool">';
 	##}
   $imghtml .= '<img src="../img/' .$picfiles[$randpic] .'" alt="Tallinna Ülikool">';
-  require("header.php");
+
 ?>
 <body>
   <img src="../vp_pics/vp_banner.png" alt="Veebiprogrammeerimise kursuse logo">
-  <h1><?php echo $username; ?></h1>
+  <h1><?php echo $_SESSION["userfirstname"] ." " .$_SESSION["userlastname"]; ?></h1>
   <ul>
 	<li><a href="ideapage.php"> Mõtete sisestamise leht </a></li> <br>
 	<li><a href="ideaanswers.php"> Mõtete vastuste leht </a></li> <br>
 	<li><a href="listfilms.php"> Filmide nimekirja leht </a></li> <br>
 	<li><a href="addfilms.php"> Filmiinfo lisamise leht </a></li> <br>
+	<li><a href="filmgenre.php">Filmi žanrid</a></li> <br>
+	<li><a href="userprofile.php"> Minu kasutajaprofiil </a></li> <br>
+	<p><a href="?logout=1">Logi välja!</a></p>
   </ul>
   <p>See veebileht on loodud õppetöö käigus ning ei sisalda mingit tõsiseltvõetavat sisu!</p>
   <p>Leht on loodud veebiprogrammeerimise kursuse raames <a href="https://www.tlu.ee">Tallinna Ülikooli</a> Digitehnoloogiate instituudis.</p>

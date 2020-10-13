@@ -1,6 +1,16 @@
 <?php
+  session_start();
+  require("../../../config.php");
+  require ("fnc_user.php");
+  require ("fnc_common.php");
   //var_dump($_POST);
-  $username = "Oliver Antsov";
+  $result = "";
+  $username = "";
+  $email = "";
+  $notice = "";
+  $password = "";
+  $emailerror = "";
+  $passworderror = "";
   $datenow = date("d.");
   $yearnow = date("Y");
   $clocknow = date("H:i:s");
@@ -9,7 +19,6 @@
   
   $weekdaynameset = ["esmaspäev", "teisipäev", "kolmapäev", "neljapäev", "reede", "laupäev", "pühapäev"];
   $monthnameset = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni", "juuli", "august", "september", "oktoober", "november", "detsember"];
-  ##echo $weekdaynameset[1];
   $weekdaynow = date("N");
   $monthnow = date("n");
   
@@ -28,7 +37,6 @@
   if ($hournow >= 18 and $hournow < 23);{
 	$partofday = "vaba aeg";
   }	
-  //echon välja
   
   //vaatame semestri kulgemist
   $semesterstart = new DateTime("2020-8-31");
@@ -61,25 +69,49 @@
   $imghtml = "";
   $piccount = count($picfiles);
   $randpic = mt_rand(0, ($piccount - 1));
-  ##$i = $i + 1;
-  ##$i ++;
-  //$i += 3
-  ##for($i = 0;$i < $randpic; $i ++){
-	  ##<img src="../img/pildifail" alt="tekst">
-	  ##$imghtml .= '<img src="../img/' .$picfiles[$i] .'" alt="Tallinna Ülikool">';
-	##}
   $imghtml .= '<img src="../img/' .$picfiles[$randpic] .'" alt="Tallinna Ülikool">';
+  
   require("header.php");
+  
+  
+  if(isset($_POST["accountlogin"])){
+    if(empty($_POST["emailinput"])){
+        $emailerror = "Palun sisestage oma email!";
+    } else {
+        $email = test_input($_POST["emailinput"]);
+    }
+    if(empty($_POST["passwordinput"])){
+        $passworderror = "Palun sisestage oma salasõna!";
+    } else {
+        $password = ($_POST["passwordinput"]);
+    }
+	if(strlen($_POST["passwordinput"]) < 8){
+		$passworderror = "Liiga lühike salasõna (sisestasite ainult " .strlen($_POST["passwordinput"]) ." märki).";
+	  }
+    if(empty ($emailerror) and empty ($passworderror)){
+        $result = signin($email, $password);
+    }
+}
 ?>
 <body>
   <img src="../vp_pics/vp_banner.png" alt="Veebiprogrammeerimise kursuse logo">
   <h1><?php echo $username; ?></h1>
   <ul>
-	<li><a href="ideapage.php"> Mõtete sisestamise leht </a></li> <br>
-	<li><a href="ideaanswers.php"> Mõtete vastuste leht </a></li> <br>
-	<li><a href="listfilms.php"> Filmide nimekirja leht </a></li> <br>
-	<li><a href="addfilms.php"> Filmiinfo lisamise leht </a></li> <br>
+	<li><a href="createaccount.php"> Uue kasutaja loomise leht </a></li> <br>
   </ul>
+  <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+	<label for="emailinput">E-posti aadress (kasutajatunnus):</label>
+	<input type="email" name="emailinput" id="emailinput" placeholder="E-posti aadress" value="<?php echo $email; ?>"> <?php echo "<span style='color:red;'> $emailerror </span>"; ?>
+	<br>
+	<br>
+	<label for="passwordinput">Salasõna:</label>
+	<input type="password" name="passwordinput" id="passwordinput" placeholder="Salasõna"> <span><?php echo "<span style='color:red;'> $passworderror </span>"; ?>
+	<br>
+	<br>
+	<input type="submit" name="accountlogin" value="Logi sisse"><span><?php echo "&nbsp; &nbsp; &nbsp;" .$notice; ?></span>
+	<br>
+	<?php echo "<span style='color:red;'> $result </span>"; ?>
+  </form>
   <p>See veebileht on loodud õppetöö käigus ning ei sisalda mingit tõsiseltvõetavat sisu!</p>
   <p>Leht on loodud veebiprogrammeerimise kursuse raames <a href="https://www.tlu.ee">Tallinna Ülikooli</a> Digitehnoloogiate instituudis.</p>
   <h1>Minust</h1>
@@ -89,7 +121,6 @@
   <p><?php echo "Semestri kestvus päevades: " .$semestercurrentdays; ?></p>
   <hr>
   <?php echo $imghtml; ?>
-  
 </body>
 </html>
 
