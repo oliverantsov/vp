@@ -103,6 +103,7 @@
   require ("header.php");
 ?>
 <img src="../vp_pics/vp_banner.png" alt="Veebiprogrammeerimise kursuse logo">
+<h1><?php echo $_SESSION["userfirstname"] ." " .$_SESSION["userlastname"]; ?></h1>
   <ul>
 	<li><a href="page.php"> Tagasi kodulehele </a></li>  
   </ul>

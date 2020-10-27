@@ -95,7 +95,7 @@
 ?>
 <body>
   <img src="../vp_pics/vp_banner.png" alt="Veebiprogrammeerimise kursuse logo">
-  <h1><?php echo $username; ?></h1>
+  <h1><?php echo $_SESSION["userfirstname"] ." " .$_SESSION["userlastname"]; ?></h1>
   <ul>
 	<li><a href="createaccount.php"> Uue kasutaja loomise leht </a></li> <br>
   </ul>

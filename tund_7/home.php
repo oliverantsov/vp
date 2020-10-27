@@ -82,7 +82,7 @@
 	<li><a href="listfilms.php"> Filmide nimekirja leht </a></li> <br>
 	<li><a href="addfilms.php"> Filmiinfo lisamise leht </a></li> <br>
 	<li><a href="listfilmpersons.php"> Filmitegelaste loend </a></li> <br>
-	<li><a href="filmgenre.php">Filmi žanrid</a></li> <br>
+	<li><a href="addfilmrelations.php">Filmiinfo määramine erinevate parameetrite alusel</a></li> <br>
 	<li><a href="userprofile.php"> Minu kasutajaprofiil </a></li> <br>
 	<p><a href="?logout=1">Logi välja!</a></p>
   </ul>
